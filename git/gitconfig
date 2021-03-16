@@ -1,6 +1,6 @@
 [user]
 	name = Jonas Helgemo
-	email = jonas.helgemo@webstep.no
+	email = jonas@jhel.no
 	signingkey = 83A72040E9FBCDD14891B9DA141B129C68C3940C
 [include]
 	path = .gitconfig.local
@@ -54,7 +54,7 @@
 	program = /usr/local/bin/gpg
 [commit]
 	template = ~/.gitmessage
-	gpgsign = true
+    gpgsign = true
 [fetch]
 	prune = true
 [diff]

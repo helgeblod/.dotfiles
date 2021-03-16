@@ -1,9 +1,7 @@
 - defaults:
     link:
       relink: true
-
 - clean: ['~']
-
 - link:
     ~/.asdf: asdf
     ~/.config/fish:

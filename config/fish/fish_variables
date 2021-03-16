@@ -19,7 +19,6 @@ SETUVAR _fish_abbr_dap:dotnet\x20add\x20package
 SETUVAR _fish_abbr_dcl:docker\x2dcompose\x20logs\x20\x2df
 SETUVAR _fish_abbr_dco:docker\x2dcompose
 SETUVAR _fish_abbr_dcu:docker\x2dcompose\x20up\x20\x2dd
-SETUVAR _fish_abbr_dev_2D_proxy:c
 SETUVAR _fish_abbr_dr:dotnet\x20run
 SETUVAR _fish_abbr_gv:tmuxinator\x20start\x20gv
 SETUVAR _fish_abbr_i:idea

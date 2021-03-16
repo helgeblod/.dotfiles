@@ -6,7 +6,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # TODO Add support for other package managers
     echo "I know this, this is a Linux system 🐧"
     apt-get update
-    apt-get install git fish exa sd bat procs dust tealdeer htop
+    # Use homebrew on linux to avoid hassle with sudo and missing packages
+    apt-get install build-essential curl file git
+    # Install homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    brew install git fish exa procs dust tealdeer sd htop
+
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "I know this, this is MacOS 🍏"
     brew update
@@ -21,9 +26,12 @@ else
 fi
 
 echo "📦 Fetching dotfiles repo"
-git clone https://github.com/helgeblod/.dotfiles.git ~/.dotfiles "Done "
+git clone https://github.com/helgeblod/.dotfiles.git ~/.dotfiles
 
 echo "Running dotfile installer"
 ~/.dotfiles/install
 
-echo "Done ✨"
+echo "Changing shell to 🐟"
+chsh -s $(which fish)
+
+echo "Dotfiles set up ✨"

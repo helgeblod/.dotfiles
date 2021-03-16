@@ -6,14 +6,28 @@
 
 - link:
     ~/.asdf: asdf
-    ~/.config/fish: config/fish
-    ~/.config/alacritty: config/alacritty
-    ~/.config/omf: config/omf
-    ~/.config/starship.toml: config/starship.toml
-    ~/.config/tmuxinator: config/tmuxinator
+    ~/.config/fish:
+      create: true
+      path: config/fish
+    ~/.config/alacritty:
+      create: true
+      path: config/alacritty
+    ~/.config/omf:
+      create: true
+      path: config/omf
+    ~/.config/starship.toml:
+      create: true
+      path: config/starship.toml
+    ~/.config/tmuxinator:
+      create: true
+      path: config/tmuxinator
     ~/.dialogrc: dialog/.dialogrc
-    ~/.doom.d/init.el: doom-emacs/doom.d/init.el
-    ~/.doom.d/packages.el: doom-emacs/doom.d/packages.el
+    ~/.doom.d/init.el:
+      create: true
+      path: doom-emacs/doom.d/init.el
+    ~/.doom.d/packages.el:
+      create: true
+      path: doom-emacs/doom.d/packages.el
     ~/.gitconfig: git/gitconfig
     ~/.gitignore: git/gitignore
     ~/.gitmessage: git/gitmessage

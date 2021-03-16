@@ -6,15 +6,15 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # TODO Add support for other package managers
     echo "I know this, this is a Linux system 🐧"
     apt update
-    apt install git fish
+    apt install git fish emacs-nox
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "I know this, this is MacOS 🍏"
     brew update
-    brew install git fish
+    brew install git fish emacs-nox
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
     echo "I know this, this i a FreeBSD system 😈"
     pkg update
-    pkg install git fish
+    pkg install git fish emacs-nox
 else
     echo "I don't know this system 😞"
     exit 1

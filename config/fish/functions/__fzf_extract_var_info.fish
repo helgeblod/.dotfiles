@@ -1,0 +1,1 @@
+/Users/jonashelgemo/.config/fisherman/fzf.fish/functions/__fzf_extract_var_info.fish

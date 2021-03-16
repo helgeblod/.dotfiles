@@ -1,0 +1,43 @@
+alias st='git status'
+alias di='git diff'
+alias log='git log -10 --oneline'
+alias push='git push'
+alias pull='git pull'
+alias e="/usr/local/Cellar/emacs/24.5/bin/emacsclient --no-wait"
+alias irc="ssh -tt ssh.api.no ssh -tt snodd tmux a"
+alias dssh="docker-machine ssh T-400"
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose stop"
+alias dcl="docker-compose logs"
+alias dco="docker-compose"
+
+# Set paths
+set -gx PATH $PATH /usr/local/sbin /usr/sbin /usr/bin /sbin /bin /usr/games $HOME/bin $HOME/code/tools/dev /usr/local/bin
+set -gx CDPATH $CDPATH $HOME/code $HOME/code/gems .
+
+# Tacklebox
+source ~/.tacklebox/tacklebox.fish
+
+# rbenv
+rbenv init - | source
+
+# Node.js stuff
+#set -g -x NVM_DIR /Users/jonas/.nvm
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Java
+set -gx JAVA_HOME (/usr/libexec/java_home)
+set -gx _JAVA_OPTIONS -Djava.awt.headless=true 
+
+# Editor
+set -gx EDITOR emacsclient
+
+# Don't exit on ctrl-d
+set -o ignoreeof
+
+#set -g -x LANG en_US.UTF-8
+#export LC_ALL="en_US.UTF-8"
+
+
+
+

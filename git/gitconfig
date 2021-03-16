@@ -1,0 +1,79 @@
+[user]
+	name = Jonas Helgemo
+	email = jonas.helgemo@webstep.no
+	signingkey = 83A72040E9FBCDD14891B9DA141B129C68C3940C
+[include]
+	path = .gitconfig.local
+[core]
+    editor = Emacs -nw -Q
+	excludesfile = ~/.gitignore
+	# autocrlf = input
+	filemode = false
+	ignorecase = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = input
+[alias]
+    ci = commit
+    co = checkout
+    b = branch
+    a = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+    nb = checkout -b
+    df = diff
+    st = status
+    prb = pull --rebase
+    praise = blame
+    quicklog = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+    changes = log --pretty=oneline --decorate
+    wordchanges = diff --color-words
+    graph = log --graph --oneline --decorate  
+    me = merge --no-commit --no-ff
+    cleanup = "!git co master && git pull && git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    rha = "!(git add --all :/ && git commit -qm \"HARD RESET SAVEPOINT\" && git reset --hard HEAD^); git reset --hard"
+    wip = "!git add --all :/ && git commit -m \"WIP\""
+    rbm = "!git fetch origin master:master && git rebase master"
+    local-branches = !git branch -vv | cut -c 3- | awk '$3 !~/\\[/ { print $1 }'
+    bo = "!git checkout $(git branch --sort=-committerdate -vv | sk | awk '{print $1}' | sed \"s/.* //\")"
+[push]
+	default = current
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[github]
+	user = helgeblod
+[gpg]
+	program = /usr/local/bin/gpg
+[commit]
+	template = ~/.gitmessage
+	gpgsign = true
+[fetch]
+	prune = true
+[diff]
+	noprefix = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true

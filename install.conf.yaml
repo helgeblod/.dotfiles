@@ -1,0 +1,30 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.asdf: asdf
+    ~/.config/fish: config/fish
+    ~/.config/alacritty: config/alacritty
+    ~/.config/omf: config/omf
+    ~/.config/starship.toml: config/starship.toml
+    ~/.config/tmuxinator: config/tmuxinator
+    ~/.dialogrc: dialog/.dialogrc
+    ~/.doom.d/init.el: doom-emacs/doom.d/init.el
+    ~/.doom.d/packages.el: doom-emacs/doom.d/packages.el
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore: git/gitignore
+    ~/.gitmessage: git/gitmessage
+    ~/.iterm2: iterm2/
+    ~/.prettierrc: js/prettierrc
+    ~/.terraformrc: terraform/terraformrc
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.conf.local: tmux/tmux.conf.local
+
+- create:
+    - ~/src
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

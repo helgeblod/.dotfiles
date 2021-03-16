@@ -1,8 +1,7 @@
 if not set -q fish_shell_initialized
     set -Ux fish_shell_initialized
     echo -n Setting abbreviations...
-
-    abbr alpine-fish 'docker run -v (pwd):/local-dir --rm --name alpine-fish -it colstrom/abbr'
+    abbr alpine-fish 'docker run -v (pwd):/local-dir --rm --name alpine-fish -it colstrom/fish:alpine'
     abbr be 'bundle exec'
     abbr bi 'bundle install'
     abbr bs 'brew search'
@@ -50,24 +49,41 @@ bind \e\cl $__fzf_search_vars_cmd
 bind \e\ck '__fzf_search_git_log'
 bind \e\cj '__fzf_search_git_status'
 
-# Aliases
-alias g='hub'
-alias bb='brew bundle --global'
-alias tf='terraform'
-alias uuid='uuidgen  | awk \'{print tolower($0)}\''
-alias cat='bat'
-alias less='bat'
-alias more='bat'
-alias ls='exa'
-alias top='ytop'
-alias htop='ytop'
-alias ps='procs'
-alias sed='sd'
-alias du='dust'
-alias grep='ripgrep'
-alias tldr='tealdeer'
 
-alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
+# Alias
+function alias_if_available
+    if type -qs $argv[2]
+        alias $argv[1]=$argv[2]
+    end
+end
+
+alias_if_available ls exa
+alias_if_available g hub
+alias_if_available ls exa
+alias_if_available ls exa
+alias_if_available tf terraform
+alias_if_available cat bat
+alias_if_available less bat
+alias_if_available more bat
+alias_if_available tf terraform
+alias_if_available top htop
+alias_if_available sed sd
+alias_if_available ps procs
+alias_if_available du dust
+alias_if_available grep ripgrep
+alias_if_available tldr tealdeer
+
+if type -qs "brew"
+    alias bb='brew bundle --global'
+end
+
+if type -qs "uuidgen"
+    alias uuid='uuidgen  | awk \'{print tolower($0)}\''
+end
+
+if type -qs "caddy"
+    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
+end
 
 ################################################################################
 # Load customer custom config if present in customer src folder

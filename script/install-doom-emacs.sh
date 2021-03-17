@@ -8,5 +8,5 @@ then
     ~/.emacs.d/bin/doom install
 else
     echo "Doom Emacs installed, skipping ..."
-        ~/.emacs.d/bin/doom sync
+    ~/.emacs.d/bin/doom sync
 fi

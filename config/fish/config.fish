@@ -22,7 +22,7 @@ end
 set -gx PATH $PATH /usr/sbin /usr/bin /sbin /bin $HOME/bin /usr/local/bin $HOME/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin $HOME/.asdf/shims/ $HOME/.asdf/bin/ $HOME/.asdf/installs/rust/stable/bin/ /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ ~/.local/bin
 
 # Set CDPATH
-#set -gx CDPATH $CDPATH .
+set -gx CDPATH $CDPATH .
 
 # Golang
 set -gx GOPATH $HOME/src/go
@@ -39,16 +39,7 @@ set -gx AZURE_CONFIG_DIR ~/.azure
 # GnuPG
 set -gx GPG_TTY (tty)
 
-# fzf-fish bindings
-# \cf is Ctrl+f
-set --universal fzf_fish_custom_keybindings
-bind \cj '__fzf_search_current_dir'
-bind \cr '__fzf_search_history'
-# The following two key binding use Alt as an additional modifier key to avoid conflicts
-bind \e\cl $__fzf_search_vars_cmd
-bind \e\ck '__fzf_search_git_log'
-bind \e\cj '__fzf_search_git_status'
-
+set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 
 # Alias
 function alias_if_available
@@ -57,6 +48,9 @@ function alias_if_available
     end
 end
 
+alias dotedit='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
+alias magit='emacsclient -nw -e "(magit-status)"'
+alias e='emacsclient -n --alternate-editor=""'
 alias_if_available ls exa
 alias_if_available g hub
 alias_if_available ls exa
@@ -67,7 +61,7 @@ alias_if_available less bat
 alias_if_available more bat
 alias_if_available tf terraform
 alias_if_available top htop
-alias_if_available sed sd
+#alias_if_available sed sd
 alias_if_available ps procs
 alias_if_available du dust
 alias_if_available grep ripgrep
@@ -84,6 +78,12 @@ end
 if type -qs "caddy"
     alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
 end
+
+if type -qs "fzf"
+    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
+end
+
+
 
 ################################################################################
 # Load customer custom config if present in customer src folder

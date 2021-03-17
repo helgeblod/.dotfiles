@@ -41,6 +41,7 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [curl https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf -o tmux/tmux.conf, Syncing tmux.conf]
   -
     command: script/install-doom-emacs.sh
     stdin: true

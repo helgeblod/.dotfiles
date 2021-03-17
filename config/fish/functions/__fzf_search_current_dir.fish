@@ -1,1 +1,0 @@
-/Users/jonashelgemo/.config/fisherman/fzf.fish/functions/__fzf_search_current_dir.fish

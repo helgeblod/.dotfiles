@@ -11,9 +11,6 @@
     ~/.config/alacritty:
       create: true
       path: config/alacritty
-    ~/.config/omf:
-      create: true
-      path: config/omf
     ~/.config/starship.toml:
       create: true
       path: config/starship.toml

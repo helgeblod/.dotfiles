@@ -13,8 +13,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew install git fish emacs-nox
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
     echo "I know this, this i a FreeBSD system 😈"
-    pkg update
-    pkg install git fish emacs-nox
+    sudo pkg update
+    sudo pkg install git fish emacs-nox python
 else
     echo "I don't know this system 😞"
     exit 1

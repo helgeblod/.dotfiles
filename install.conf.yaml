@@ -42,7 +42,6 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [curl https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish -o config/fish/fzf_key_bindings.fish, Syncing fzf fish keybindings]
   - [curl https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf -o tmux/tmux.conf, Syncing tmux.conf]
   -
     command: script/install-doom-emacs.sh

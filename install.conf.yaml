@@ -6,8 +6,8 @@
     ~/.asdf: asdf
     ~/.config/fish:
       create: true
+      force: true
       path: config/fish
-      if: '[ `uname` = Darwin ]'
     ~/.config/alacritty:
       create: true
       path: config/alacritty
@@ -30,8 +30,12 @@
     ~/.iterm2: iterm2/
     ~/.prettierrc: js/prettierrc
     ~/.terraformrc: terraform/terraformrc
-    ~/.tmux.conf: tmux/tmux.conf
-    ~/.tmux.conf.local: tmux/tmux.conf.local
+    ~/.tmux.conf:
+      force: true
+      path: tmux/tmux.conf
+    ~/.tmux.conf.local:
+      force: true
+      path: tmux/tmux.conf.local
 
 - create:
     - ~/src

@@ -30,9 +30,6 @@ set -gx GOPATH $HOME/src/go
 # Editor
 set -gx EDITOR 'emacsclient -n -create-frame --alternate-editor=""'
 
-# z.lua
-set -gx _ZL_MATCH_MODE 1
-
 # Set global azure config dir (overrides in customer volumes)
 set -gx AZURE_CONFIG_DIR ~/.azure
 
@@ -95,10 +92,17 @@ for file in ~/src/customer/*/*.fish
 end
 
 # asdf version manager
-source /usr/local/opt/asdf/asdf.fish
+if type -qs "asdf"
+    source /usr/local/opt/asdf/asdf.fish
+end
+
 
 # zoxide
-zoxide init fish | source
+if type -qs "zoxide"
+    zoxide init fish | source
+end
 
 # Starship must be last
-eval (starship init fish)
+if type -qs "starship"
+    eval (starship init fish)
+end

@@ -23,7 +23,9 @@ fi
 echo "📦 Fetching dotfiles repo"
 git clone https://github.com/helgeblod/.dotfiles.git ~/.dotfiles
 echo "Running dotfile installer"
-~/.dotfiles/install
+cd ~/.dotfiles/
+./install
 
-echo "You might want to change your shell to fish 'chsh -s /usr/local/bin/fish' (or similar)"
+echo "🌹 For an even nicer terminal time, install these: exa, bat, htop, procs, dust, ripgrep"
+echo "🐟 You might want to change your shell to fish 'chsh -s /usr/local/bin/fish' (or similar)"
 echo "Dotfiles set up ✨"

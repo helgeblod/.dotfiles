@@ -6,7 +6,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # TODO Add support for other package managers
     echo "I know this, this is a Linux system 🐧"
     apt update
-    apt install git fish emacs-nox
+    apt install -y git fish emacs-nox
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "I know this, this is MacOS 🍏"
     brew update
@@ -14,7 +14,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
     echo "I know this, this i a FreeBSD system 😈"
     sudo pkg update
-    sudo pkg install git fish emacs-nox python
+    sudo pkg install -y git fish emacs-nox python
 else
     echo "I don't know this system 😞"
     exit 1

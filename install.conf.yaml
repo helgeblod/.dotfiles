@@ -17,6 +17,9 @@
     ~/.config/tmuxinator:
       create: true
       path: config/tmuxinator
+    ~/.hammerspoon:
+      create: true
+      path: hammerspoon
     ~/.dialogrc: dialog/.dialogrc
     ~/.doom.d/init.el:
       create: true

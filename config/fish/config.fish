@@ -36,6 +36,9 @@ set -gx AZURE_CONFIG_DIR ~/.azure
 # GnuPG
 set -gx GPG_TTY (tty)
 
+# Unset AWS_PROFILE
+set -e AWS_PROFILE
+
 set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 
 # Alias

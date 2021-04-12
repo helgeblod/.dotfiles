@@ -3,3 +3,4 @@
 npm-debug.log
 config/version.txt
 .ruby-version
+/.DS_Store

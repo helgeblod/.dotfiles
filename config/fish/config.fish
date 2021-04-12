@@ -76,7 +76,7 @@ if type -qs "uuidgen"
 end
 
 if type -qs "caddy"
-    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
+    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile --watch'
 end
 
 if type -qs "fzf"

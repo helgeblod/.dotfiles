@@ -10,7 +10,7 @@ if not set -q fish_shell_initialized
     abbr dcu 'docker-compose up -d'
     abbr planck-flash 'wally-cli (ls -t ~/Downloads/planck*.bin | head -1)'
     abbr si 'say -v Nora'
-    abbr st 'git status | fpp'
+    abbr st 'git status'
     abbr ubuntu 'docker run -it --rm ubuntu'
     abbr ubuntu-fish 'docker run -v (pwd):/local-dir --rm --name ubuntu-fish -it colstrom/fish:ubuntu'
     abbr weeknumber 'gdate +%V -d today '
@@ -78,12 +78,6 @@ end
 if type -qs "caddy"
     alias dev-proxy='caddy run --config ~/.caddy/Caddyfile --watch'
 end
-
-if type -qs "fzf"
-    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile'
-end
-
-
 
 ################################################################################
 # Load customer custom config if present in customer src folder

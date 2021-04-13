@@ -19,7 +19,7 @@
     a = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
     nb = checkout -b
     df = diff
-    st = status
+    st = 'status'
     prb = pull --rebase
     praise = blame
     quicklog = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"

@@ -57,7 +57,18 @@ window:
   #     - none: Neither borders nor title bar
   #     - buttonless: Title bar, transparent background and title bar buttons
   #     - transparent: Title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: None
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: SimpleFullscreen
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -83,22 +94,22 @@ font:
   normal:
     family: Source Code Pro
     # The `style` can be specified to pick a specific face.
-    # style: Regular
+    style: Regular
 
   # Italic font face
   bold:
     family: Source Code Pro
     # The `style` can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # Italic font face
   italic:
     family: Source Code Pro
     # The `style` can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size
-  size: 22.0
+  size: 20.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -121,7 +132,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`
-  use_thin_strokes: true
+  use_thin_strokes: false
 
 # Display the time it takes to redraw each frame.
 render_timer: false
@@ -365,7 +376,7 @@ live_config_reload: true
 shell:
 program: /usr/local/bin/fish
 args:
-  - -C 'tmuxinator start terminals'
+  - --command='tmuxinator start terminals'
 
 # Key bindings
 #

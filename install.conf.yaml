@@ -39,6 +39,9 @@
     ~/.tmux.conf.local:
       force: true
       path: tmux/tmux.conf.local
+    ~/.cargo/config:
+      create: true
+      path: cargo/config
 
 - create:
     - ~/src

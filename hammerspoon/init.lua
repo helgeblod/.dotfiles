@@ -65,6 +65,5 @@ hs.window.filter.default:subscribe(hs.window.filter.windowFocused, function(wind
   local alacritty = hs.application.get('Alacritty')
   if alacritty ~= nil then
      alacritty:hide()
-  else
   end
 end)

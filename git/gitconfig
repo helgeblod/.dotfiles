@@ -5,7 +5,7 @@
 [include]
 	path = .gitconfig.local
 [core]
-    editor = Emacs -nw -Q
+    editor = jove
 	excludesfile = ~/.gitignore
 	# autocrlf = input
 	filemode = false

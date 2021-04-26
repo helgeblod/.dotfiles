@@ -28,7 +28,7 @@ set -gx CDPATH $CDPATH .
 set -gx GOPATH $HOME/src/go
 
 # Editor
-set -gx EDITOR 'emacsclient -n -create-frame --alternate-editor=""'
+set -gx EDITOR 'jove'
 
 # Set global azure config dir (overrides in customer volumes)
 set -gx AZURE_CONFIG_DIR ~/.azure

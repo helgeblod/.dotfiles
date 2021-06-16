@@ -5,9 +5,9 @@ if not set -q fish_shell_initialized
     abbr be 'bundle exec'
     abbr bi 'bundle install'
     abbr bs 'brew search'
-    abbr dcl 'docker-compose logs -f'
-    abbr dco 'docker-compose'
-    abbr dcu 'docker-compose up -d'
+    abbr dcl 'docker compose logs -f'
+    abbr dco 'docker compose'
+    abbr dcu 'docker compose up -d'
     abbr planck-flash 'wally-cli (ls -t ~/Downloads/planck*.bin | head -1)'
     abbr si 'say -v Nora'
     abbr st 'git status'
@@ -76,7 +76,7 @@ if type -qs "uuidgen"
 end
 
 if type -qs "caddy"
-    alias dev-proxy='caddy run --config ~/.caddy/Caddyfile --watch'
+    alias dev-proxy='caddy start --config ~/.caddy/Caddyfile --watch'
 end
 
 ################################################################################

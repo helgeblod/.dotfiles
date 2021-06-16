@@ -2,8 +2,6 @@
 	name = Jonas Helgemo
 	email = jonas@jhel.no
 	signingkey = 83A72040E9FBCDD14891B9DA141B129C68C3940C
-[include]
-	path = .gitconfig.local
 [core]
     editor = jove
 	excludesfile = ~/.gitignore
@@ -50,8 +48,6 @@
 	process = git-lfs filter-process
 [github]
 	user = helgeblod
-[gpg]
-	program = /usr/local/bin/gpg
 [commit]
 	template = ~/.gitmessage
     gpgsign = true

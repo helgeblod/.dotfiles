@@ -44,17 +44,13 @@ set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 # Alias
 function alias_if_available
     if type -qs $argv[2]
-        alias $argv[1]=$argv[2]
+        alias $argv[1]=$argv[2..-1]
     end
 end
 
 alias dotedit='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
 alias magit='emacsclient -nw -e "(magit-status)"'
 alias e='emacsclient -n --alternate-editor=""'
-alias_if_available ls exa
-alias_if_available g hub
-alias_if_available ls exa
-alias_if_available ls exa
 alias_if_available tf terraform
 alias_if_available cat bat
 alias_if_available less bat
@@ -66,6 +62,10 @@ alias_if_available ps procs
 alias_if_available du dust
 alias_if_available grep ripgrep
 alias_if_available tldr tealdeer
+
+if type -qs exa
+    alias ls='exa --icons'
+end
 
 if type -qs "brew"
     alias bb='brew bundle --global'

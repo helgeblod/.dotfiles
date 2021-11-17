@@ -53,8 +53,9 @@ startup = [
     "source ~/.cache/starship/init.nu",
 
     # Source customer configs
-    "autoenv trust ~/src/customer/enova | save --raw /dev/null",
-    "autoenv trust ~/src/customer/memoro | save --raw /dev/null",
+    '["memoro" "enova"] | each { autoenv trust ([~/src/customer/ $it] | path join | into string) } | clear'
+    # "autoenv trust ~/src/customer/enova | save --raw /dev/null",
+    # "autoenv trust ~/src/customer/memoro | save --raw /dev/null",
 
 
 ]

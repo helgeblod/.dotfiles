@@ -39,6 +39,7 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
   else
     local space = spaces.activeSpace()
     local mainScreen = hs.screen.find(spaces.mainScreenUUID())
+    print("mainScreen:", spaces.mainScreenUUID())
     if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
       local appWatcher = nil
       print('create app watcher')
@@ -63,7 +64,9 @@ end)
 -- Hide alacritty if not in focus
 hs.window.filter.default:subscribe(hs.window.filter.windowFocused, function(window, appName)
   local alacritty = hs.application.get('Alacritty')
+  print(alacritty)
   if alacritty ~= nil then
+     print('hiding alacritty')
      alacritty:hide()
   end
 end)

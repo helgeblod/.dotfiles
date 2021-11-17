@@ -1,8 +1,7 @@
 if not set -q fish_shell_initialized
     set -Ux fish_shell_initialized
     echo -n Setting abbreviations...
-    abbr alpine-fish 'docker run -v (pwd):/local-dir --rm --name alpine-fish -it colstrom/fish:alpine'
-    abbr be 'bundle exec'
+    abbr alpine-fish 'docker run -v (pwd):/local-dir --rm --name alpine-fish -it helgeblod/alpine-fish'
     abbr bi 'bundle install'
     abbr bs 'brew search'
     abbr dcl 'docker compose logs -f'
@@ -48,23 +47,28 @@ function alias_if_available
     end
 end
 
-alias dotedit='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
+alias de='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
 alias magit='emacsclient -nw -e "(magit-status)"'
 alias e='emacsclient -n --alternate-editor=""'
-alias_if_available tf terraform
-alias_if_available cat bat
-alias_if_available less bat
-alias_if_available more bat
-alias_if_available tf terraform
-alias_if_available top htop
+alias be='e ~/.dotfiles-local/homebrew/Brewfile'
+
 #alias_if_available sed sd
-alias_if_available ps procs
+alias_if_available cp fcp
 alias_if_available du dust
 alias_if_available grep ripgrep
+alias_if_available less bat
+alias_if_available more bat
+alias_if_available ps procs
+alias_if_available tf terraform
 alias_if_available tldr tealdeer
+alias_if_available top htop
 
 if type -qs exa
     alias ls='exa --icons'
+end
+
+if type -qs bat
+    alias cat='bat -pp --theme="Nord"'
 end
 
 if type -qs "brew"

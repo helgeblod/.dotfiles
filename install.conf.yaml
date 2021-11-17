@@ -4,10 +4,19 @@
 - clean: ['~']
 - link:
     ~/.asdf: asdf
+
     ~/.config/fish:
       create: true
       force: true
       path: config/fish
+    "~/Library/Application Support/org.nushell.nu/config.toml":
+      create: true
+      force: true
+      path: config/nu/config.toml
+    "~/Library/Application Support/org.nushell.nu/keybindings.yml":
+      create: true
+      force: true
+      path: config/nu/keybindings.yml
     ~/.config/alacritty:
       create: true
       path: config/alacritty

@@ -1061,6 +1061,8 @@
 	<string>B5653B53-79A6-47AF-9139-30C8E954023B</string>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>EnableAPIServer</key>
+	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideFromDockAndAppSwitcher</key>

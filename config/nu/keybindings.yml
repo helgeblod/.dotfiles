@@ -1,6 +1,3 @@
-# Link this file like this
-# ln -s ~/.dotfiles/config/nu/keybindings.yml ~/Library/Application\ Support/org.nushell.nu/keybindings.yml
-
 # These are the common keys acrosso modes taken directly from Rustyline. If
 # you want to change the keybinding you should change the letter after
 # "key:". If you want to change the modifier you should change or add the

@@ -1,3 +1,10 @@
+command_timeout = 1000
+# ~/.config/starship.toml
+
+[env_var.CUSTOMER]
+default = ""
+format = "[$env_value]($style)"
+
 [git_metrics]
 added_style = "bold blue"
 format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
@@ -16,3 +23,22 @@ modified = "📝"
 staged = "➕"
 renamed = "👅"
 deleted = "🗑"
+
+[gcloud]
+symbol = "🧿"
+format = '[$symbol$account(@$domain)(\($project\))]($style) '
+[gcloud.region_aliases]
+europe-west3 = "frankfurt"
+
+[azure]
+disabled = false
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"
+
+[kubernetes]
+format = 'on [☸ $context](dimmed blue) '
+disabled = false
+[kubernetes.context_aliases]
+"aks-plattform42-prod-noea" = "enova-prod ️🚨"
+"aks-plattform42-dev-noea" = "enova-dev"

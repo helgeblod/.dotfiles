@@ -2,9 +2,11 @@
 # ln -s ~/.dotfiles/config/nu/config.toml ~/Library/Application\ Support/org.nushell.nu/config.toml
 
 path = [ "/Users/jonashelgemo/.asdf/shims", "/usr/local/opt/asdf/bin",
-     "/usr/local/bin", "/usr/bin", "/bin", "/usr/sbin", "/sbin",
+     "/usr/bin", "/bin", "/usr/sbin", "/sbin",
      "/Library/Apple/usr/bin", "/usr/local/share/dotnet", "~/.dotnet/tools",
      "/usr/local/MacGPG2/bin",
+     "/opt/homebrew/bin", # arm64 Homebrew
+     "/usr/local/bin", # Intel/Rosetta Homewbrew
      "/Library/Frameworks/Mono.framework/Versions/Current/Commands",
      "/Users/jonashelgemo/.asdf/installs/ruby/2.7.2/bin",
      "/Users/jonashelgemo/bin", "/Users/jonashelgemo/.dapr/bin",
@@ -15,7 +17,7 @@ path = [ "/Users/jonashelgemo/.asdf/shims", "/usr/local/opt/asdf/bin",
      "/Applications/Emacs.app/Contents/MacOS/bin/",
      "/Users/jonashelgemo/.emacs.d/bin/", "/Users/jonashelgemo/.local/bin",
      "/usr/sbin", "/usr/bin", "/sbin", "/bin", "/Users/jonashelgemo/bin",
-     "/usr/local/bin", "/Users/jonashelgemo/.dapr/bin",
+      "/Users/jonashelgemo/.dapr/bin",
      "/Users/jonashelgemo/src/go/bin", "/Users/jonashelgemo/.cargo/bin",
      "/Users/jonashelgemo/.asdf/shims/", "/Users/jonashelgemo/.asdf/bin/",
      "/Users/jonashelgemo/.asdf/installs/rust/stable/bin/",
@@ -26,43 +28,68 @@ path = [ "/Users/jonashelgemo/.asdf/shims", "/usr/local/opt/asdf/bin",
      "/Users/jonashelgemo/.asdf/installs/ruby/3.0.0/bin"]
 
 
-filesize_format = "KB" # can be b, kb, kib, mb, mib, gb, gib, etc
+filesize_format = "b, kb, mb, gb" # can be b, kb, kib, mb, mib, gb, gib, etc
 filesize_metric = true # true => (KB, MB, GB), false => (KiB, MiB, GiB)
 skip_welcome_message = false # Note to nushell developer: This is expected to be false, when testing nushell itself
 disable_table_indexes = false
 nonzero_exit_errors = true
 
 startup = [
-    # Aliases
-    "alias mopen = ^open",
-    "alias less = bat",
-    "alias cat = bat",
-    "alias st = git status",
 
-    # Special ENV-variabes
-    "let-env GPG_TTY = (tty)",
+    # 🥸 Aliases
+
+    "alias bi = brew install",
+    "alias bro = tldr", # I always forget about tldr/tealdeer
+    "alias bs = brew search",
+    "alias cat = bat",
+    "alias dcr = docker compose restart",
+    "alias dcu = docker compose up",
+    "alias gb = gradle build",
+    "alias gt = gradle test",
+    "alias he = help -f",
+    "alias hf = fuzzy-command-search",
+    "alias hi = fuzzy-history-search",
+    "alias ibrew = arch -x86_64 /usr/local/bin/brew",
+    "alias less = bat",
+    "alias mopen = ^open",
+    "alias quote = cat ~/.dotfiles/config/nu/resources/mscottquotes.txt | lines | shuffle | first | lolcat",
+    "alias play-quote = afplay (ls ~/.dotfiles-local/sounds/ | where type == File | shuffle | first | format '{name}')",
+    "alias st = git status",
+    "alias tf = terraform",
+    "alias ubuntu-fish = docker run -v (pwd):/local-dir --rm --name ubuntu-fish -it colstrom/fish:ubuntu",
+    "alias uuid = random uuid",
+
+    # 🍅 Pomodoro-stuff
+    "def start-focus [] { mopen 'focus://focus?minutes=25'; play-quote; }",
+
+    # OSAC releaser
+    "def release-patch [] { dialog --defaultno --yes-label '🚀' --no-label '🚫' --title 'Deploy 📦' --yesno (build-string 'Deploy version ' ((open Cargo.toml).package.version | inc -p) '?') 7 60; git pull; cargo bump patch -g; git push; git push --tags }",
 
     # Custom functions
+    "def dev-proxy [] { cd ~/.dotfiles-local/traefik/; docker compose up -d }",
     "def e [file: path] {emacsclient -n --alternate-editor='' $file}",
     "zoxide init nushell --hook prompt | save ~/.zoxide.nu", "source ~/.zoxide.nu",
     "def mount-src [customer: string] { hdiutil attach (['~' 'customer-data' ($customer + '.dmg')] | path join)  -Mountpoint (['~' 'src' 'customer' $customer] | path join)}",
 
-    # Starshi stuff
+    # Script includes
+    "source /Users/jonashelgemo/.dotfiles/config/nu/nu_scripts/fuzzy_history_search.nu",
+    "source /Users/jonashelgemo/.dotfiles/config/nu/nu_scripts/fuzzy_command_search.nu",
+
+    # Special ENV-variabes
+    "let-env GPG_TTY = (tty)",
+
+    # Starship stuff
     "mkdir ~/.cache/starship",
     "starship init nu | save ~/.cache/starship/init.nu",
     "source ~/.cache/starship/init.nu",
 
     # Source customer configs
-    '["memoro" "enova"] | each { autoenv trust ([~/src/customer/ $it] | path join | into string) } | clear'
-    # "autoenv trust ~/src/customer/enova | save --raw /dev/null",
-    # "autoenv trust ~/src/customer/memoro | save --raw /dev/null",
-
-
+    '["memoro" "enova" "osac"] | each { autoenv trust ([~/src/customer/$it] | path join | into string) } | clear',
 ]
 
 prompt = "starship_prompt"
 
-Table_mode = "basic" # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+Table_mode = "other" # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
 plugin_dirs = [""]
 pivot_mode = "auto" # auto, always, never
 ctrlc_exit = false
@@ -70,8 +97,10 @@ complete_from_path = true
 rm_always_trash = true
 
 [env]
+CUSTOMER = ""
+KUBECONFIG = ""
 EDITOR = "jove" # Editor
-AZURE_CONFIG_DIR = "~/.azure" # Set global azure config dir (overrides in customer volumes)
+CLOUDSDK_CONFIG = "" # gcloud default config
 FZF_DEFAULT_COMMAND = "fd --type f" # fzf override default command
 
 # for each of the options in the color_config section, you are able to set
@@ -118,12 +147,13 @@ leading_trailing_space_bg = "white"
 max_history_size = 100000
 history_duplicates = "ignoreconsecutive" # alwaysadd,ignoreconsecutive
 history_ignore_space = false
-completion_type = "circular" # circular, list, fuzzy
+completion_type = "list" # circular, list, fuzzy
+completion_match_method = "case-insensitive"
 completion_prompt_limit = 100
 keyseq_timeout_ms = 500 # ms
 edit_mode = "emacs" # vi, emacs
 auto_add_history = true
-bell_style = "audible" # audible, none, visible
+bell_style = "visible" # audible, none, visible
 color_mode = "enabled" # enabled, forced, disabled
 tab_stop = 4
 

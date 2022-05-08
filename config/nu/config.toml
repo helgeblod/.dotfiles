@@ -58,6 +58,7 @@ startup = [
     "alias tf = terraform",
     "alias ubuntu-fish = docker run -v (pwd):/local-dir --rm --name ubuntu-fish -it colstrom/fish:ubuntu",
     "alias uuid = random uuid",
+    "alias r = op run -- ",
 
     # 🍅 Pomodoro-stuff
     "def start-focus [] { mopen 'focus://focus?minutes=25'; play-quote; }",

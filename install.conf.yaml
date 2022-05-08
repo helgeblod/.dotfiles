@@ -17,6 +17,10 @@
       create: true
       force: true
       path: config/nu/keybindings.yml
+    "~/Library/Application Support/nushell":
+      create: true
+      force: true
+      path: nu
     ~/.config/alacritty:
       create: true
       path: config/alacritty

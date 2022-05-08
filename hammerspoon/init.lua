@@ -62,11 +62,11 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
 end)
 
 -- Hide alacritty if not in focus
-hs.window.filter.default:subscribe(hs.window.filter.windowFocused, function(window, appName)
-  local alacritty = hs.application.get('Alacritty')
-  print(alacritty)
-  if alacritty ~= nil then
-     print('hiding alacritty')
-     alacritty:hide()
-  end
-end)
+-- hs.window.filter.default:subscribe(hs.window.filter.windowFocused, function(window, appName)
+--   local alacritty = hs.application.get('Alacritty')
+--   print(alacritty)
+--   if alacritty ~= nil then
+--      print('hiding alacritty')
+--      alacritty:hide()
+--   end
+-- end)

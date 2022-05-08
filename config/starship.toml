@@ -1,9 +1,18 @@
 command_timeout = 1000
 # ~/.config/starship.toml
+[shell]
+disabled = false
+bash_indicator = "💩"
+fish_indicator = "🐠"
+nu_indicator = ""
 
 [env_var.CUSTOMER]
 default = ""
 format = "[$env_value]($style)"
+
+[env_var.ENV]
+symbol = " "
+format = "$symbol[$env_value]($style)"
 
 [git_metrics]
 added_style = "bold blue"
@@ -33,7 +42,7 @@ europe-west3 = "frankfurt"
 [azure]
 disabled = false
 format = "on [$symbol($subscription)]($style) "
-symbol = "ﴃ "
+symbol = "🌊"
 style = "blue bold"
 
 [kubernetes]

@@ -33,11 +33,20 @@ window:
 
   # Window padding (changes require restart)
   #
-  # Blank space added around the window in pixels. This padding is not scaled
+  # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   #padding:
-  #  x: 2
-  #  y: 2
+  x: 300
+  # y: 0
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.95
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -94,22 +103,21 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    # family: Source Code Pro for Powerline
-    family: SauceCodePro Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
+    family: Jetbrains Mono
     # The `style` can be specified to pick a specific face.
     style: Regular
 
   # Italic font face
   bold:
-    # family: Source Code Pro for Powerline
-    family: SauceCodePro Nerd Font Mono
+    family: Jetbrains Mono
     # The `style` can be specified to pick a specific face.
     style: Bold
 
   # Italic font face
   italic:
     # family: Source Code Pro for Powerline
-    family: SauceCodePro Nerd Font Mono
+    family: Jetbrains Mono
     # The `style` can be specified to pick a specific face.
     style: Italic
 
@@ -314,12 +322,6 @@ draw_bold_text_with_bright_colors: false
 bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-window.opacity: 0.95
 
 # Mouse bindings
 #

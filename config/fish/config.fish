@@ -14,11 +14,12 @@ if not set -q fish_shell_initialized
     abbr ubuntu-fish 'docker run -v (pwd):/local-dir --rm --name ubuntu-fish -it colstrom/fish:ubuntu'
     abbr weeknumber 'gdate +%V -d today '
     echo 'Done ✨'
-
 end
 
 # Set paths
-set -gx PATH $PATH /usr/sbin /usr/bin /sbin /bin $HOME/bin /usr/local/bin $HOME/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin $HOME/.asdf/shims/ $HOME/.asdf/bin/ $HOME/.asdf/installs/rust/stable/bin/ /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ ~/.local/bin
+#set -gx PATH $PATH /usr/sbin /usr/bin /sbin /bin $HOME/bin /usr/local/bin $HOME/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin $HOME/.asdf/shims/ $HOME/.asdf/bin/ $HOME/.asdf/installs/rust/stable/bin/ /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ ~/.local/bin
+set -gx PATH $HOME/bin $HOME/.rbenv/shims $HOME/.asdf/bin $HOME/.asdf/shims /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin /usr/local/share/dotnet $HOME/.dotnet/tools /usr/local/MacGPG2/bin /usr/local/bin /Library/Frameworks/Mono.framework/Versions/Current/Commands/Users/jonashelgemo/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ $HOME/.local/bin $HOME/Library/Python/3.8/bin /usr/local/share/dotnet/x64/
+
 
 # Set CDPATH
 set -gx CDPATH $CDPATH .
@@ -29,8 +30,15 @@ set -gx GOPATH $HOME/src/go
 # Editor
 set -gx EDITOR 'jove'
 
+# Env
+set -gx ENV 'dev'
+
 # Set global azure config dir (overrides in customer volumes)
 set -gx AZURE_CONFIG_DIR ~/.azure
+
+# Set gcloud config (override customer settings)
+set -gx GCP_PROJECT ""
+set -gx CLOUDSDK_CONFIG ""
 
 # GnuPG
 set -gx GPG_TTY (tty)
@@ -47,10 +55,26 @@ function alias_if_available
     end
 end
 
+function dev-proxy
+    set current_dir (pwd)
+    cd ~/.dotfiles-local/traefik/
+    op run --env-file=.op_env -- docker compose up -d
+    cd $current_dir
+end
+
 alias de='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
 alias magit='emacsclient -nw -e "(magit-status)"'
 alias e='emacsclient -n --alternate-editor=""'
 alias be='e ~/.dotfiles-local/homebrew/Brewfile'
+alias opr='op run --'
+alias opr-nomask='op run --no-masking --'
+alias ope='op run --env-file=.op_env --'
+alias ope-nomask='op run --env-file=.op_env --no-masking --'
+alias prod-env='set -x ENV prod'
+alias dev-env='set -x ENV = dev'
+alias date='gdate'
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+alias iarch= 'arch -x86_64'
 
 #alias_if_available sed sd
 alias_if_available cp fcp
@@ -62,6 +86,7 @@ alias_if_available ps procs
 alias_if_available tf terraform
 alias_if_available tldr tealdeer
 alias_if_available top htop
+alias_if_available bro tldr
 
 if type -qs exa
     alias ls='exa --icons'
@@ -79,10 +104,6 @@ if type -qs "uuidgen"
     alias uuid='uuidgen  | awk \'{print tolower($0)}\''
 end
 
-if type -qs "caddy"
-    alias dev-proxy='caddy start --config ~/.caddy/Caddyfile --watch'
-end
-
 ################################################################################
 # Load customer custom config if present in customer src folder
 ################################################################################
@@ -94,9 +115,13 @@ end
 
 # asdf version manager
 if type -qs "asdf"
-    source /usr/local/opt/asdf/asdf.fish
+    source /usr/local/opt/asdf/libexec/asdf.fish
 end
 
+# 1Password-cli
+if type -qs "op"
+    op completion fish | source
+end
 
 # zoxide
 if type -qs "zoxide"
@@ -105,5 +130,9 @@ end
 
 # Starship must be last
 if type -qs "starship"
-    eval (starship init fish)
+    starship init fish | source
+end
+
+if type -qs "direnv"
+    direnv hook fish | source
 end

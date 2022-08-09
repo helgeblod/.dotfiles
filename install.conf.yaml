@@ -27,6 +27,10 @@
     ~/.config/starship.toml:
       create: true
       path: config/starship.toml
+    ~/.config/broot/conf.hjson:
+      create: true
+      force: true
+      path: config/broot/conf.hjson
     ~/.config/tmuxinator:
       create: true
       path: config/tmuxinator

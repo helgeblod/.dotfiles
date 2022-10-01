@@ -1,24 +1,25 @@
-local spaces = require('hs._asm.undocumented.spaces') -- https://github.com/asmagill/hs._asm.undocumented.spaces
+-- https://github.com/asmagill/hs._asm.undocumented.spaces
+local spaces = require "hs.spaces"
+local screen = require "hs.screen"
 
 -- Switch alacritty
 hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
   local APP_NAME = 'Alacritty'
-  function moveWindow(alacritty, space, mainScreen)
+  function moveWindow(alacritty, space)
     -- move to main space
     local win = nil
     while win == nil do
       win = alacritty:mainWindow()
     end
-    print(win)
-    print(space)
-    print(win:screen())
-    print(mainScreen)
+    print("win = ", win)
+    print("space = ", space)
+    print("win:screen() = ", win:screen())
     local fullScreen = not win:isStandard()
     if fullScreen then
       hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
     end
     winFrame = win:frame()
-    scrFrame = mainScreen:fullFrame()
+    scrFrame = screen.mainScreen():frame()
     print(winFrame)
     print(scrFrame)
     winFrame.w = scrFrame.w
@@ -27,7 +28,7 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
     print(winFrame)
     win:setFrame(winFrame, 0)
     print(win:frame())
-    win:spacesMoveTo(space)
+    spaces.moveWindowToSpace(win, space)
     if fullScreen then
       hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
     end
@@ -37,9 +38,8 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
   if alacritty ~= nil and alacritty:isFrontmost() then
     alacritty:hide()
   else
-    local space = spaces.activeSpace()
-    local mainScreen = hs.screen.find(spaces.mainScreenUUID())
-    print("mainScreen:", spaces.mainScreenUUID())
+    local space = spaces.activeSpaceOnScreen()
+    print("activeSpace() = ", space)
     if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
       local appWatcher = nil
       print('create app watcher')
@@ -48,7 +48,7 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
         print(event)
         if event == hs.application.watcher.launched and name == APP_NAME then
           app:hide()
-          moveWindow(app, space, mainScreen)
+          moveWindow(app, space)
           appWatcher:stop()
         end
       end)
@@ -56,7 +56,7 @@ hs.hotkey.bind({'alt','shift','ctrl'}, 'j', function ()
       appWatcher:start()
     end
     if alacritty ~= nil then
-      moveWindow(alacritty, space, mainScreen)
+      moveWindow(alacritty, space)
     end
   end
 end)

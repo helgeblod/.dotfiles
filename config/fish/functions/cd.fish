@@ -3,9 +3,12 @@ function cd
         if test -d $argv
             builtin cd "$argv"
         else
-            z $argv
+            ji $argv
         end
     else
         builtin cd
     end
+    echo "📂 PWD:" (pwd)
+    echo ""
+    ls
 end

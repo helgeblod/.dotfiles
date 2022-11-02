@@ -3,6 +3,6 @@
 npm-debug.log
 config/version.txt
 .ruby-version
-/.DS_Store
+.DS_Store
 .envrc
 .op_env

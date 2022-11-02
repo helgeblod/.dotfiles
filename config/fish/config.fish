@@ -48,6 +48,12 @@ set -e AWS_PROFILE
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 
+function atarist
+    pushd ~/Games/AtariST
+    hatari -c ~/.dotfiles-local/hatari/hatari.cfg (fzf)
+    popd
+end
+
 # Alias
 function alias_if_available
     if type -qs $argv[2]
@@ -62,21 +68,28 @@ function dev-proxy
     cd $current_dir
 end
 
-alias de='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
-alias magit='emacsclient -nw -e "(magit-status)"'
-alias e='emacsclient -n --alternate-editor=""'
 alias be='e ~/.dotfiles-local/homebrew/Brewfile'
-alias opr='op run --'
-alias opr-nomask='op run --no-masking --'
-alias ope='op run --env-file=.op_env --'
-alias ope-nomask='op run --env-file=.op_env --no-masking --'
-alias prod-env='set -x ENV prod'
-alias dev-env='set -x ENV = dev'
+alias cb='cargo build'
+alias ci='cargo install'
+alias cip='cargo install --path'
+alias cr='cargo run'
 alias date='gdate'
+alias de='emacsclient -n --alternate-editor="" (fd -E "dotbot" -E "alfred" . ~/.dotfiles* | fzf)'
+alias dev-env='set -x ENV dev; direnv reload'
+alias docker-sh='docker exec -it (gum choose (docker ps --format "{{.Names}}")) bash'
+alias e='emacsclient -n --alternate-editor=""'
+alias iarch='arch -x86_64'
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
-alias iarch= 'arch -x86_64'
+alias magit='emacsclient -nw -e "(magit-status)"'
+alias ope-nm='op run --env-file=.op_env --no-masking --'
+alias ope='op run --env-file=.op_env --'
+alias opr-nm='op run --no-masking --'
+alias opr='op run --'
+alias prod-env='set -x ENV prod;direnv reload'
+alias watcher='hwatch -c'
 
 #alias_if_available sed sd
+alias_if_available bro tldr
 alias_if_available cp fcp
 alias_if_available du dust
 alias_if_available grep ripgrep
@@ -86,7 +99,6 @@ alias_if_available ps procs
 alias_if_available tf terraform
 alias_if_available tldr tealdeer
 alias_if_available top htop
-alias_if_available bro tldr
 
 if type -qs exa
     alias ls='exa --icons'
@@ -125,14 +137,21 @@ end
 
 # zoxide
 if type -qs "zoxide"
-    zoxide init fish | source
+    zoxide init fish --cmd j | source
 end
+
+
 
 # Starship must be last
 if type -qs "starship"
     starship init fish | source
 end
 
-if type -qs "direnv"
-    direnv hook fish | source
-end
+# direnv hook fish | source
+
+# if type -qs "oh-my-posh"
+#     # Themes here: https://github.com/JanDeDobbeleer/oh-my-posh/tree/main/themes
+#     #oh-my-posh init fish --config (brew --prefix oh-my-posh)/themes/festivetech.omp.json | source # christmas 🎅
+#     oh-my-posh init fish | source
+
+# end

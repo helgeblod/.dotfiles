@@ -18,7 +18,7 @@ end
 
 # Set paths
 #set -gx PATH $PATH /usr/sbin /usr/bin /sbin /bin $HOME/bin /usr/local/bin $HOME/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin $HOME/.asdf/shims/ $HOME/.asdf/bin/ $HOME/.asdf/installs/rust/stable/bin/ /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ ~/.local/bin
-set -gx PATH $HOME/bin $HOME/.rbenv/shims $HOME/.asdf/bin $HOME/.asdf/shims /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin /usr/local/share/dotnet $HOME/.dotnet/tools /usr/local/MacGPG2/bin /usr/local/bin /Library/Frameworks/Mono.framework/Versions/Current/Commands/Users/jonashelgemo/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ $HOME/.local/bin $HOME/Library/Python/3.8/bin /usr/local/share/dotnet/x64/
+set -gx PATH $HOME/bin $HOME/.rbenv/shims $HOME/.asdf/bin $HOME/.asdf/shims /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin /usr/local/share/dotnet $HOME/.dotnet/tools /usr/local/MacGPG2/bin /usr/local/bin /Library/Frameworks/Mono.framework/Versions/Current/Commands/Users/jonashelgemo/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ $HOME/.local/bin $HOME/Library/Python/3.8/bin /usr/local/share/dotnet/x64/ ./target/release/
 
 
 # Set CDPATH
@@ -68,6 +68,14 @@ function dev-proxy
     cd $current_dir
 end
 
+
+# .. - cd .., ... - cd ../.. etc
+function multicd
+    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+end
+
+abbr --add dotdot --regex '^\.\.+$' --function multicd
+
 alias be='e ~/.dotfiles-local/homebrew/Brewfile'
 alias cb='cargo build'
 alias ci='cargo install'
@@ -87,6 +95,7 @@ alias opr-nm='op run --no-masking --'
 alias opr='op run --'
 alias prod-env='set -x ENV prod;direnv reload'
 alias watcher='hwatch -c'
+alias docker-shell='docker run -v (pwd):/local-dir --rm --name docker-shell -it'
 
 #alias_if_available sed sd
 alias_if_available bro tldr
@@ -137,21 +146,21 @@ end
 
 # zoxide
 if type -qs "zoxide"
-    zoxide init fish --cmd j | source
+    zoxide init fish --cmd z | source
 end
 
 
 
 # Starship must be last
-if type -qs "starship"
-    starship init fish | source
-end
+ if type -qs "starship"
+     starship init fish | source
+ end
 
 # direnv hook fish | source
 
 # if type -qs "oh-my-posh"
 #     # Themes here: https://github.com/JanDeDobbeleer/oh-my-posh/tree/main/themes
-#     #oh-my-posh init fish --config (brew --prefix oh-my-posh)/themes/festivetech.omp.json | source # christmas 🎅
-#     oh-my-posh init fish | source
+#     oh-my-posh init fish --config (brew --prefix oh-my-posh)/themes/festivetech.omp.json | source # christmas 🎅
+#     #oh-my-posh init fish | source
 
 # end

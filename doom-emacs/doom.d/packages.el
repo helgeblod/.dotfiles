@@ -22,7 +22,8 @@
 (package! tj3-mode)
 (package! gnuplot-mode)
 (package! ox-json)
-
+(package! org-ql)
+(package! all-the-icons) ;; M-x all-icons-install-fonts
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

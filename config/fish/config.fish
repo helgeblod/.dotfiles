@@ -18,7 +18,7 @@ end
 
 # Set paths
 #set -gx PATH $PATH /usr/sbin /usr/bin /sbin /bin $HOME/bin /usr/local/bin $HOME/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin $HOME/.asdf/shims/ $HOME/.asdf/bin/ $HOME/.asdf/installs/rust/stable/bin/ /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ ~/.local/bin
-set -gx PATH $HOME/bin $HOME/.rbenv/shims $HOME/.asdf/bin $HOME/.asdf/shims /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin /usr/local/share/dotnet $HOME/.dotnet/tools /usr/local/MacGPG2/bin /usr/local/bin /Library/Frameworks/Mono.framework/Versions/Current/Commands/Users/jonashelgemo/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ $HOME/.local/bin $HOME/Library/Python/3.8/bin /usr/local/share/dotnet/x64/ ./target/release/
+set -gx PATH $HOME/bin $HOME/.rbenv/shims $HOME/.asdf/bin $HOME/.asdf/shims /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin /usr/local/share/dotnet $HOME/.dotnet/tools /usr/local/MacGPG2/bin /usr/local/bin /Library/Frameworks/Mono.framework/Versions/Current/Commands/Users/jonashelgemo/.dapr/bin $HOME/src/go/bin $HOME/.cargo/bin /Applications/Emacs.app/Contents/MacOS/ /Applications/Emacs.app/Contents/MacOS/bin/ $HOME/.emacs.d/bin/ $HOME/.local/bin $HOME/Library/Python/3.8/bin /usr/local/share/dotnet/x64/ ./target/release/ /Library/TeX/texbin/
 
 
 # Set CDPATH
@@ -131,6 +131,7 @@ end
 for file in ~/src/customer/*/*.fish
     # Add directory to CDPATH
     set -gx CDPATH $CDPATH (dirname $file)
+    set -gx PATH $PATH (dirname $file)/bin
     source $file
 end
 
